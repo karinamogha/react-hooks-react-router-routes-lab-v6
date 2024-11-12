@@ -4,19 +4,14 @@ import NavBar from '../components/NavBar';
 const Actors = () => {
   const [actors, setActors] = useState([]);
 
-  useEffect(() => {
-    const fetchActors = async () => {
-      try {
-        const response = await fetch("http://localhost:4000/actors");
-        const data = await response.json();
-        setActors(data);
-      } catch (error) {
-        console.error("Failed to fetch actors:", error);
-      }
-    };
-
-    fetchActors();
-  }, []); 
+  useEffect(() =>{
+    fetch(`http://localhost:4000/actors`)
+    .then(r => r.json())
+    .then(data => {
+      setActors(data);
+  })
+    .catch(error => console.error(error));
+  }, []);
 
   return (
     <>

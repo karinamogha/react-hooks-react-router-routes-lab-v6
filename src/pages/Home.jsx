@@ -5,19 +5,13 @@ import MovieCard from "../components/MovieCard";
 const Home = () => {
   const [movies, setMovies] = useState([]); 
   
-  useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const response = await fetch("http://localhost:4000/movies");
-        const data = await response.json();
-        setMovies(data); 
-      } catch (error) {
-        console.error("Failed to fetch movies:", error);
-      }
-    };
-
-    fetchMovies();
-  }, []); 
+  useEffect(() =>{
+    fetch("http://localhost:4000/movies")
+      .then(r => r.json())
+      .then(data => setMovies(data))
+      .catch(error => console.error(error));
+  }, []);
+  
 
   return (
     <>
